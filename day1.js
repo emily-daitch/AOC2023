@@ -1,4 +1,8 @@
+//testCase imported from day1data.js
+//make an array from the test case lines
 const testCaseArray = testCase.split("\n");
+
+//add first and last occurring numbers (or for part two, numbers or number-words) on each line
 const testAnswer = testCaseArray.reduce((accumulator, currentValue) => {
     let currentCalculation = 0;
     let firstValue = undefined;
@@ -6,9 +10,11 @@ const testAnswer = testCaseArray.reduce((accumulator, currentValue) => {
     let firstIndex = undefined;
     let secondIndex = undefined;
     let i = 0;
-    console.log('checking ', currentValue);
+
+    //console.log('checking ', currentValue);
     for (c of currentValue) {
-        console.log('checking ', c);
+        //console.log('checking ', c);
+        //if first number is not yet found and the current character is not a number, check for number-words
         if (isNaN(firstValue) && isNaN(c)) {
             switch (c) {
                 case 'o':
@@ -90,16 +96,19 @@ const testAnswer = testCaseArray.reduce((accumulator, currentValue) => {
                     break;
             }
         }
+        //if first number is not yet found and current character is a number, record it
         if (isNaN(firstValue) && !isNaN(c)) {
             firstValue = Number(c);
             lastValue = Number(c);
             firstIndex = i;
             secondIndex = i;
         }
+        //if current value is a number, always override the last found number
         if (!isNaN(c)) {
             lastValue = Number(c);
             secondIndex = i;
         }
+        //if current value is not a number, check for number-words and override last value if found
         if (isNaN(c)) {
             switch (c) {
                 case 'o':
@@ -166,9 +175,11 @@ const testAnswer = testCaseArray.reduce((accumulator, currentValue) => {
         i++;
     }
 
+    //create a two digit number from the first and last found occurrences to add to the running total
     currentCalculation = 10 * firstValue + lastValue;
     console.log('aadding ', currentCalculation);
     return accumulator + currentCalculation;
 }, 0);
 
+//show on page...
 document.querySelector('#header').innerHTML = testAnswer;
