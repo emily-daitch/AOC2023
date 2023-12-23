@@ -1,0 +1,27 @@
+from mpl_toolkits.mplot3d import Axes3D
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Create axis
+axes = [5, 5, 5]
+
+# Create Data
+data = np.ones(axes, dtype=bool)
+
+# Control Transparency
+alpha = 0.9
+
+# Control colour
+colors = np.empty(axes + [4], dtype=np.float32)
+
+colors[:] = [1, 0, 0, alpha]  # red
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+
+ax.voxels(data, facecolors=colors)
+
+#size = 21
+#m = np.zeros(shape = (size, size, size))
+
+  // wip eventual visulization of algorithm
